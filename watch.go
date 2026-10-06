@@ -40,6 +40,12 @@ func watch(ctx context.Context, dir, outAbs string, onChange func() error) error
 			if shouldIgnore(ev.Name, outAbs) {
 				continue
 			}
+			// Chmod means only attributes changed, not content. On macOS a
+			// rebuild is followed by another Chmod on the page it just read,
+			// so reacting to it rebuilds in a loop.
+			if ev.Op == fsnotify.Chmod {
+				continue
+			}
 			if ev.Op&fsnotify.Create != 0 {
 				if info, err := os.Stat(ev.Name); err == nil && info.IsDir() {
 					_ = addWatchTree(w, ev.Name, outAbs)
