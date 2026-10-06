@@ -21,7 +21,7 @@ If you need blog collections, i18n, or a plugin ecosystem, use Hugo or Astro. in
 - Markdown for prose, raw HTML when you want full control
 - Frontmatter for page metadata, `ink.yaml` for site-wide data
 - Built-in themes you can override with your own
-- Single `assets/` directory
+- `assets/` for theme files, `static/` for anything served from the site root
 - Works as a CLI or a Go library
 
 ## Install
@@ -86,10 +86,22 @@ my-site/
 │       ├── layout.html  # Go template with {{.Content}}
 │       ├── styles.css
 │       └── script.js
-└── assets/              # images, favicons, fonts
+├── assets/              # images, favicons, fonts → /assets/...
+└── static/              # optional: copied to the site root as is
 ```
 
 Build output goes to `public/`.
+
+## Assets and static files
+
+Two folders, one rule each:
+
+| Folder | Served at | Use for |
+|---|---|---|
+| `assets/` | `/assets/<path>` | images, fonts and icons your pages use |
+| `static/` | `/<path>` | files that need a root URL: `robots.txt`, `CNAME`, a hand-written HTML page |
+
+Both are copied as-is and both are optional. `static/` is not processed: no markdown, no theme. See the [docs](docs/inkssg.md#static-files) for details.
 
 ## Themes
 

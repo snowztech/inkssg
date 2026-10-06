@@ -36,7 +36,7 @@ That's it. inkssg detects your site structure, builds pages to `public/`, and ou
 inkssg.Build()
 ```
 
-Detects `pages/`, themes, and assets automatically.
+Detects `pages/`, themes, `assets/` and `static/` automatically.
 
 ### Build from a specific directory
 
@@ -95,6 +95,17 @@ my-site/
 ```
 
 No `ink.yaml` needed for simple sites.
+
+Everything inkssg looks for, all of it optional except `pages/`:
+
+```
+my-site/
+├── ink.yaml       site-wide data
+├── pages/         one folder per page          → /<name>.html
+├── themes/        your own themes
+├── assets/        images, fonts, icons         → /assets/...
+└── static/        files that need a root URL   → /...
+```
 
 ## Pages
 
@@ -231,13 +242,13 @@ links:
 
 ## Assets
 
-Put images, fonts, and other static files in `assets/`. They copy to `public/assets/` as-is.
+Put the files your pages use in `assets/`: images, fonts, icons. They copy to `public/assets/` as-is.
 
 ```
 my-site/
 └── assets/
     └── img/
-        └── logo.png
+        └── logo.png     → /assets/img/logo.png
 ```
 
 Reference them with absolute paths in your content:
@@ -245,6 +256,60 @@ Reference them with absolute paths in your content:
 ```markdown
 ![logo](/assets/img/logo.png)
 ```
+
+## Static files
+
+Some files need an exact URL at the root of the site. Put those in `static/`. Everything in it copies to the root of `public/` as-is, keeping its folders.
+
+```
+my-site/
+└── static/
+    ├── robots.txt                  → /robots.txt
+    ├── CNAME                       → /CNAME
+    ├── demo.html                   → /demo.html
+    └── .well-known/
+        └── security.txt            → /.well-known/security.txt
+```
+
+The folder is optional and needs no config. If it isn't there, nothing happens.
+
+Typical uses:
+
+- `robots.txt`, `ads.txt`, `CNAME`, `.nojekyll`
+- site verification files from search consoles
+- a standalone HTML page you wrote by hand and don't want wrapped in a theme
+- a file you want to link to directly, like `/cv.pdf`
+
+### assets/ or static/?
+
+| | `assets/` | `static/` |
+|---|---|---|
+| Served at | `/assets/<path>` | `/<path>` |
+| Use for | files your pages and themes reference | files that need an exact root URL |
+| Example | `assets/img/logo.png` → `/assets/img/logo.png` | `static/robots.txt` → `/robots.txt` |
+
+If you're not sure, use `assets/`. Reach for `static/` only when the URL matters.
+
+### What inkssg does not do
+
+Static files are copied, not built. No markdown rendering, no layout, no frontmatter. An HTML file in `static/` is published exactly as you wrote it. If you want a page with your theme around it, make it a page under `pages/`.
+
+Dotfiles are copied too, so `.well-known/` and `.nojekyll` work. So does anything your OS drops in there, like `.DS_Store`.
+
+### Name clashes
+
+The build copies in this order, and later steps overwrite earlier ones:
+
+1. theme files → `public/themes/<name>/`
+2. `assets/` → `public/assets/`
+3. `static/` → `public/`
+4. pages → `public/<name>.html`
+
+So a built page always wins: `static/index.html` does not replace the page from `pages/index/`. A file under `static/assets/` or `static/themes/` does replace the one from `assets/` or the theme. Avoid those two folder names inside `static/` unless that is what you want.
+
+### With `inkssg serve`
+
+`static/` is watched like the rest of the project. Add or change a file and the site rebuilds.
 
 ## Output
 
@@ -271,4 +336,4 @@ See `examples/` in the repo for complete sites:
 
 - `examples/library/` — minimal site using the library API
 - `examples/minimal/` — single page with default theme
-- `examples/multi-page/` — multiple pages, shared theme
+- `examples/multi-page/` — multiple pages, shared theme, a `robots.txt` in `static/`
