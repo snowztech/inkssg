@@ -374,6 +374,10 @@ func (s *Site) Build() error {
 		return fmt.Errorf("copying assets: %w", err)
 	}
 
+	if err := s.copyStatic(); err != nil {
+		return fmt.Errorf("copying static: %w", err)
+	}
+
 	failed := 0
 	for _, page := range s.Pages {
 		if err := s.buildPage(page, themeDir); err != nil {
@@ -455,6 +459,18 @@ func (s *Site) copyAssets() error {
 	}
 
 	return copyDir(assetsDir, outputAssets)
+}
+
+// copyStatic copies static/ to the root of the output, so static/cv.pdf is
+// served at /cv.pdf. It runs before pages are written: a page wins over a
+// static file with the same name.
+func (s *Site) copyStatic() error {
+	staticDir := filepath.Join(s.Dir, "static")
+	if _, err := os.Stat(staticDir); os.IsNotExist(err) {
+		return nil
+	}
+
+	return copyDir(staticDir, filepath.Join(s.Dir, s.Output))
 }
 
 func copyDir(src, dst string) error {

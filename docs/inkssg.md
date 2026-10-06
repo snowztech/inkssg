@@ -246,6 +246,19 @@ Reference them with absolute paths in your content:
 ![logo](/assets/img/logo.png)
 ```
 
+## Static files
+
+Anything in `static/` is copied to the root of `public/` as-is. Use it for files that need a root URL: `robots.txt`, a `CNAME`, a standalone HTML page, an image you want at `/photo.jpg`.
+
+```
+my-site/
+└── static/
+    ├── robots.txt       → /robots.txt
+    └── demo.html        → /demo.html
+```
+
+If a static file has the same name as a built page, the page wins.
+
 ## Output
 
 Build output:
