@@ -20,7 +20,7 @@ Every feature added is a burden for every user. inkssg does the common case well
 
 **3. Explicit over magical**
 
-No hidden rewrites, no implicit conventions beyond the essentials. User learns `/assets/<path>` once. No surprise path rewriting or auto-redirects.
+No hidden rewrites, no implicit conventions beyond the essentials. Paths are literal: `assets/<path>` is served at `/assets/<path>`, `static/<path>` at `/<path>`. No surprise path rewriting or auto-redirects.
 
 **4. Small footprint, not comprehensive**
 

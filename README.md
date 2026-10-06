@@ -92,6 +92,17 @@ my-site/
 
 Build output goes to `public/`.
 
+## Assets and static files
+
+Two folders, one rule each:
+
+| Folder | Served at | Use for |
+|---|---|---|
+| `assets/` | `/assets/<path>` | images, fonts and icons your pages use |
+| `static/` | `/<path>` | files that need a root URL: `robots.txt`, `CNAME`, a hand-written HTML page |
+
+Both are copied as-is and both are optional. `static/` is not processed: no markdown, no theme. See the [docs](docs/inkssg.md#static-files) for details.
+
 ## Themes
 
 inkssg ships with three themes: `minimal`, `devtool`, and `bio`. Pick one in `ink.yaml`:
