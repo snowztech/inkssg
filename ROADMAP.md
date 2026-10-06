@@ -19,7 +19,7 @@ Goal: a user can `go get` inkssg and have a site running in minutes. No config n
 ### Build core
 - [x] Discover pages under `pages/<name>/`
 - [x] Parse YAML frontmatter from `content.md` and `content.html`
-- [x] Render markdown with goldmark (autoid for headings)
+- [x] Render markdown with goldmark
 - [x] Pass HTML body through unchanged for `content.html`
 - [x] Apply `themes/<name>/layout.html` via `html/template` with `{{.Site}}`, `{{.Page}}`, `{{.Content}}`
 - [x] Output `<name>.html` at root of `public/`
@@ -43,6 +43,40 @@ Goal: a user can `go get` inkssg and have a site running in minutes. No config n
 - [x] CI: build every example on push
 
 Note: `ink.yaml` is optional in v0.1. Add it only when you need site-wide data (name, links, bio).
+
+## v0.1.x — Fixes
+
+Bugs and cleanup found in a code review. These come before new features.
+
+### Bugs
+- [ ] Reject `output_dir` set to `pages`, `assets`, `static` or `themes` (the build deletes them today)
+- [ ] Fail the build on an invalid `ink.yaml` instead of falling back to defaults
+- [ ] `devtool` theme links `/themes/landing/styles.css`, so it ships unstyled
+- [ ] Per-page `theme:` frontmatter: copy that theme's CSS/JS and use its layout, local or built-in
+- [ ] Check the theme exists before wiping the output dir
+- [ ] Stop dropping copy errors in `copyDir` and `copyTheme` (use `os.CopyFS`), remove unused `CopyFile`
+- [ ] Layouts: page title and description win over site meta, canonical URL is per page
+
+### Markdown
+- [ ] Keep raw HTML in `content.md` (`html.WithUnsafe`)
+- [ ] Enable GFM: tables, strikethrough, autolinks
+- [ ] Auto heading IDs
+- [ ] Frontmatter: handle an empty block and a file that opens with a `---` rule
+
+### Library API
+- [ ] Let callers silence or redirect `Build` and `Scaffold` output (`io.Writer`)
+- [ ] Expose the page list to templates so themes can build a nav
+- [ ] `params:` in `ink.yaml` for custom theme data, remove the unused `TemplateData.Theme`
+- [ ] Rename before v1: `Page.Content` holds a path, `siteUrl` is the only camelCase key
+
+### CLI and serve
+- [ ] Parse flags with the stdlib `flag` package (`--addr=:8080` and unknown flags are ignored today)
+- [ ] `serve` prints a broken URL when `--addr` includes a host
+
+### Repo
+- [ ] Remove the committed `examples/library/inkssg-library-example` binary and gitignore it
+- [ ] Run `go mod tidy` (fsnotify is a direct dependency), check it in CI
+- [ ] Tests for frontmatter, `validateOutput`, theme resolution, `injectReloadScript`; run CI with `-race`
 
 ## v0.2 — Polish + daily iteration
 
