@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/ink.png" width="112" alt="inkssg octopus mascot">
+
 # inkssg
 
 ***A small static site generator in Go. No node, no plugins, no config required.***
