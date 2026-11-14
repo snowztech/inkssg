@@ -3,6 +3,7 @@ package inkssg
 import (
 	"context"
 	"fmt"
+	"net"
 	"os"
 	"os/signal"
 	"path/filepath"
@@ -68,6 +69,10 @@ func Serve(dir string, opts ...ServeOptions) error {
 		}
 	}()
 
-	fmt.Printf("inkssg serving %s on http://localhost%s\n", absDir, o.Addr)
+	displayAddr := o.Addr
+	if host, port, err := net.SplitHostPort(displayAddr); err == nil && host == "" {
+		displayAddr = net.JoinHostPort("localhost", port)
+	}
+	fmt.Printf("inkssg serving %s on http://%s\n", absDir, displayAddr)
 	return runServer(ctx, o.Addr, filepath.Join(absDir, site.Output), rl)
 }
