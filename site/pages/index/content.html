@@ -1,0 +1,123 @@
+---
+description: A small static site generator in Go. Markdown in, static site out. No node, no plugins, no config required.
+---
+<div class="sn-container">
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Markdown in, static site out.</h1>
+      <p class="sn-lede">inkssg is a small static site generator in Go. Write a page in markdown or HTML, run one command, deploy a folder. No node, no plugins, no config.</p>
+      <div class="install">
+        <code>go install github.com/snowztech/inkssg/cmd/inkssg@latest</code>
+        <button class="sn-copy-btn" data-sn-copy="go install github.com/snowztech/inkssg/cmd/inkssg@latest" aria-label="copy install command"></button>
+      </div>
+      <div class="actions">
+        <a class="sn-btn sn-btn--accent" href="docs.html">Read the docs</a>
+        <a class="sn-btn sn-btn--secondary" href="https://github.com/snowztech/inkssg">View on GitHub</a>
+      </div>
+    </div>
+
+    <figure class="demo" data-demo aria-label="inkssg serve: editing content.md updates the page">
+      <div class="demo__bar">
+        <span>~/my-site · inkssg serve</span>
+        <span class="demo__status">watching</span>
+      </div>
+      <div class="demo__panes">
+        <div class="demo__pane">
+          <div class="demo__tab">pages/index/content.md</div>
+<pre class="demo__src"><span class="fm">---
+title: Ada
+---</span>
+
+<span class="h"># <span data-src-title>Hi, I'm Ada</span><span class="caret" aria-hidden="true"></span></span>
+
+I make small tools for the
+command line, and write
+about them sometimes.
+
+<span class="ln">[GitHub](https://github.com/ada)</span></pre>
+        </div>
+        <div class="demo__pane demo__pane--out">
+          <div class="demo__tab">localhost:3000 <span class="demo__reload" data-reload>reloaded</span></div>
+          <div class="demo__page">
+            <h2 data-out-title>Hi, I'm Ada</h2>
+            <p>I make small tools for the command line, and write about them sometimes.</p>
+            <p><a href="https://github.com/snowztech/inkssg">GitHub</a></p>
+          </div>
+        </div>
+      </div>
+    </figure>
+  </section>
+
+  <section class="band">
+    <div>
+      <h2>Three commands</h2>
+      <p class="sn-lede">That's the whole workflow.</p>
+    </div>
+<pre class="sn-code commands"><code><span class="c"># start a site: ink.yaml and one page</span>
+$ inkssg new my-site
+
+<span class="c"># write, with live reload on localhost:3000</span>
+$ inkssg serve my-site
+
+<span class="c"># build public/ and deploy it anywhere</span>
+$ inkssg build my-site
+✓ index → index.html
+built 1 pages in 1ms</code></pre>
+  </section>
+
+  <section class="gallery">
+    <div class="gallery__head">
+      <h2>Three themes inside</h2>
+      <p class="sn-lede">Pick one with <code>default_theme</code> in <code>ink.yaml</code>, or drop your own in <code>themes/</code>. These are real builds.</p>
+    </div>
+    <div class="themes">
+      <figure><img src="assets/themes/minimal.png" width="960" height="600" loading="lazy" alt="A page built with the minimal theme"><figcaption><code>minimal</code> A page of writing. The default.</figcaption></figure>
+      <figure><img src="assets/themes/devtool.png" width="960" height="600" loading="lazy" alt="A page built with the devtool theme"><figcaption><code>devtool</code> A tool, with its install command.</figcaption></figure>
+      <figure><img src="assets/themes/bio.png" width="960" height="600" loading="lazy" alt="A page built with the bio theme"><figcaption><code>bio</code> A profile with projects and links.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="band">
+    <div>
+      <h2>What you get</h2>
+      <p class="sn-lede">One binary. Nothing to configure until you want to.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Markdown or HTML</dt><dd><code>content.md</code> for prose, <code>content.html</code> for full control.</dd></div>
+      <div><dt>Frontmatter and ink.yaml</dt><dd>Title and description per page, site-wide data in one optional file.</dd></div>
+      <div><dt>Your own theme</dt><dd>A <code>layout.html</code> in <code>themes/</code>. Same name as a built-in one replaces it.</dd></div>
+      <div><dt>Live reload</dt><dd><code>inkssg serve</code> rebuilds and refreshes the browser when you save.</dd></div>
+      <div><dt>A Go library</dt><dd><code>inkssg.Build(".")</code> from your own program. The CLI wraps it.</dd></div>
+      <div><dt>Assets and static files</dt><dd><code>assets/</code> for what pages use, <code>static/</code> for <code>robots.txt</code> and <code>CNAME</code>.</dd></div>
+    </dl>
+  </section>
+
+  <section class="band">
+    <div>
+      <h2>A site</h2>
+      <p class="sn-lede">Only <code>pages/</code> is required. Each folder becomes a page.</p>
+    </div>
+<pre class="sn-code tree"><code>my-site/
+├── ink.yaml          optional
+├── pages/
+│   ├── index/content.md   → index.html
+│   └── about/content.md   → about.html
+├── themes/           optional
+├── assets/           → /assets/...
+└── static/           → /</code></pre>
+  </section>
+
+  <section class="band">
+    <div>
+      <h2>Small on purpose</h2>
+      <p class="sn-lede">If you need these, Hugo or Astro are better tools. inkssg will not grow them.</p>
+    </div>
+    <ul class="nope">
+      <li>Blog features: posts, drafts, RSS</li>
+      <li>Plugins</li>
+      <li>Theme inheritance</li>
+      <li>i18n</li>
+      <li>An image pipeline</li>
+    </ul>
+  </section>
+</div>

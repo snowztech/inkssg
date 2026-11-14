@@ -1,0 +1,13 @@
+# The inkssg website, built with inkssg.
+name: inkssg
+default_theme: inkssg
+output_dir: public
+
+meta:
+  lang: en
+  title: inkssg · a small static site generator in Go
+  description: Markdown or HTML in, a folder of static pages out. No node, no plugins, no config required.
+
+links:
+  - name: GitHub
+    url: https://github.com/snowztech/inkssg

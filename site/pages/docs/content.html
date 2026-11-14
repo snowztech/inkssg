@@ -1,0 +1,170 @@
+---
+title: Docs
+description: Install inkssg, lay out a site, write pages, pick or build a theme, and use it from Go.
+---
+<div class="sn-container docs">
+<div class="sn-toc-layout">
+  <header class="sn-prose">
+    <h1>Docs</h1>
+    <p>Everything inkssg does fits on this page.</p>
+  </header>
+
+  <nav class="sn-toc" data-sn-toc aria-label="On this page">
+    <details>
+      <summary>On this page</summary>
+      <ul>
+        <li><a href="#install">Install</a></li>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#dev-server">Dev server</a></li>
+        <li><a href="#layout">Site layout</a></li>
+        <li><a href="#pages">Pages</a></li>
+        <li><a href="#frontmatter">Frontmatter</a></li>
+        <li><a href="#config">ink.yaml</a></li>
+        <li><a href="#themes">Themes</a></li>
+        <li><a href="#files">Assets and static files</a></li>
+        <li><a href="#library">Use it from Go</a></li>
+        <li><a href="#output">Build output</a></li>
+      </ul>
+    </details>
+  </nav>
+
+  <article class="sn-prose">
+    <h2 id="install">Install</h2>
+    <pre data-label="terminal"><code>go install github.com/snowztech/inkssg/cmd/inkssg@latest</code></pre>
+    <p>Or download a binary from <a href="https://github.com/snowztech/inkssg/releases">Releases</a>. Check it with <code>inkssg version</code>.</p>
+
+    <h2 id="quick-start">Quick start</h2>
+    <pre data-label="terminal"><code>inkssg new my-site
+inkssg build my-site</code></pre>
+    <p><code>new</code> creates <code>ink.yaml</code> and <code>pages/index/content.md</code>. <code>build</code> writes the site to <code>my-site/public/</code>. Edit <code>content.md</code> and build again. The <code>public/</code> folder is what you deploy.</p>
+
+    <h2 id="dev-server">Dev server</h2>
+    <pre data-label="terminal"><code>inkssg serve my-site</code></pre>
+    <p>Builds the site, serves it at <code>http://localhost:3000</code>, watches your files, and reloads the browser on every change. Pass <code>--addr :4000</code> for another port.</p>
+
+    <h2 id="layout">Site layout</h2>
+    <p>Everything is optional except <code>pages/</code>.</p>
+    <pre data-label="site layout"><code>my-site/
+├── ink.yaml       site-wide data
+├── pages/         one folder per page     → /&lt;name&gt;.html
+├── themes/        your own themes
+├── assets/        images, fonts, icons    → /assets/...
+└── static/        files that need a root URL → /...</code></pre>
+
+    <h2 id="pages">Pages</h2>
+    <p>Each page is a folder in <code>pages/</code>. The folder name becomes the file name.</p>
+    <pre data-label="pages/"><code>pages/
+├── index/content.md     → index.html
+├── about/content.md     → about.html
+└── contact/content.html → contact.html</code></pre>
+    <p>Write <code>content.md</code> for prose. Write <code>content.html</code> when you want full control: it goes into the layout unchanged.</p>
+    <aside class="sn-callout sn-callout--note">
+      <strong class="sn-callout__title">Markdown is plain markdown</strong>
+      <p>Raw HTML inside <code>content.md</code> is left out of the page, and headings get no <code>id</code>. If a page needs HTML or links to its own sections, like this one, make it <code>content.html</code>.</p>
+    </aside>
+
+    <h2 id="frontmatter">Frontmatter</h2>
+    <p>Optional metadata at the top of <code>content.md</code> or <code>content.html</code>:</p>
+    <pre data-label="content.md"><code>---
+title: About
+description: A short blurb
+theme: devtool
+---</code></pre>
+    <div class="scroll"><table>
+      <thead><tr><th>Field</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>title</code></td><td>The page title, as <code>.Page.Title</code></td></tr>
+        <tr><td><code>description</code></td><td>The meta description, as <code>.Page.Description</code></td></tr>
+        <tr><td><code>theme</code></td><td>A theme for this page only</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="config">ink.yaml</h2>
+    <p>Optional. Data shared by every page, available in templates as <code>.Site</code>. Use frontmatter for one page, <code>ink.yaml</code> for the whole site.</p>
+    <pre data-label="ink.yaml"><code>name: My Site
+default_theme: devtool
+output_dir: public
+meta:
+  lang: en
+  title: My Site
+  description: Site description
+links:
+  - name: GitHub
+    url: https://github.com/user</code></pre>
+    <div class="scroll"><table>
+      <thead><tr><th>Field</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>name</code></td><td>Site name, as <code>.Site.Name</code></td></tr>
+        <tr><td><code>default_theme</code></td><td>Theme for pages that don't set one. Defaults to <code>minimal</code></td></tr>
+        <tr><td><code>output_dir</code></td><td>Where the site is written. Defaults to <code>public</code>, must be inside the project</td></tr>
+        <tr><td><code>pages_dir</code></td><td>Where pages live. Defaults to <code>pages</code></td></tr>
+        <tr><td><code>meta</code></td><td><code>lang</code>, <code>title</code>, <code>description</code>, <code>author</code>, <code>siteUrl</code></td></tr>
+        <tr><td><code>links</code></td><td>A list of <code>name</code> and <code>url</code></td></tr>
+      </tbody>
+    </table></div>
+    <p>The built-in themes also read <code>avatar</code>, <code>bio</code>, <code>status</code>, <code>install</code>, <code>projects</code> and <code>contact.socials</code>. Your own theme can use any of them.</p>
+
+    <h2 id="themes">Themes</h2>
+    <p>Three themes are built into the binary: <code>minimal</code> (the default), <code>devtool</code> and <code>bio</code>. Pick one with <code>default_theme</code> in <code>ink.yaml</code>, or <code>theme</code> in a page's frontmatter.</p>
+    <p>To make your own, add a folder to <code>themes/</code>. Only <code>layout.html</code> is required. A local theme with the same name as a built-in one replaces it.</p>
+    <pre data-label="themes/"><code>themes/
+└── landing/
+    ├── layout.html   required
+    ├── styles.css    optional
+    └── script.js     optional</code></pre>
+    <p>Theme files are published at <code>/themes/&lt;name&gt;/</code>, so link them as <code>/themes/landing/styles.css</code>. The layout is a Go template:</p>
+    <pre data-label="layout.html"><code>&lt;!doctype html&gt;
+&lt;html lang="{{.Site.Meta.Lang}}"&gt;
+  &lt;head&gt;
+    &lt;title&gt;{{.Page.Title}}&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/themes/landing/styles.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;{{.Content}}&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    <div class="scroll"><table>
+      <thead><tr><th>Value</th><th>What it holds</th></tr></thead>
+      <tbody>
+        <tr><td><code>.Content</code></td><td>The rendered page</td></tr>
+        <tr><td><code>.Page</code></td><td><code>Name</code>, <code>Title</code>, <code>Description</code></td></tr>
+        <tr><td><code>.Site</code></td><td>The fields from <code>ink.yaml</code>, only when it exists</td></tr>
+        <tr><td><code>.Theme</code></td><td>Theme data</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="files">Assets and static files</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Folder</th><th>Served at</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr><td><code>assets/</code></td><td><code>/assets/&lt;path&gt;</code></td><td>Images, fonts and icons your pages use</td></tr>
+        <tr><td><code>static/</code></td><td><code>/&lt;path&gt;</code></td><td>Files that need an exact root URL: <code>robots.txt</code>, <code>CNAME</code>, a hand-written HTML page</td></tr>
+      </tbody>
+    </table></div>
+    <p>Both are copied as they are, dotfiles included. Nothing in <code>static/</code> is rendered or wrapped in a theme. If you're not sure, use <code>assets/</code>.</p>
+    <p>The build copies in this order, and later steps win:</p>
+    <ol>
+      <li>theme files → <code>public/themes/&lt;name&gt;/</code></li>
+      <li><code>assets/</code> → <code>public/assets/</code></li>
+      <li><code>static/</code> → <code>public/</code></li>
+      <li>pages → <code>public/&lt;name&gt;.html</code></li>
+    </ol>
+    <p>So a page always wins: <code>static/index.html</code> does not replace the page from <code>pages/index/</code>.</p>
+
+    <h2 id="library">Use it from Go</h2>
+    <pre data-label="terminal"><code>go get github.com/snowztech/inkssg</code></pre>
+    <pre data-label="main.go"><code>import "github.com/snowztech/inkssg"
+
+if err := inkssg.Build("./my-site"); err != nil {
+    log.Fatal(err)
+}</code></pre>
+    <p>With no argument, <code>inkssg.Build()</code> builds the current directory. The CLI calls the same function.</p>
+
+    <h2 id="output">Build output</h2>
+    <pre data-label="output"><code>✓ index → index.html
+✓ about → about.html
+built 2 pages in 3ms</code></pre>
+    <p>Every page is built, every error is reported, and the command exits non-zero if any page fails.</p>
+    <p>Complete sites live in <a href="https://github.com/snowztech/inkssg/tree/main/examples">examples/</a>, including one that uses the Go library.</p>
+    <p class="edit"><a href="https://github.com/snowztech/inkssg/blob/main/site/pages/docs/content.html">Edit this page on GitHub</a></p>
+  </article>
+</div>
+</div>

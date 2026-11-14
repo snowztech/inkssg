@@ -31,6 +31,9 @@ jobs:
       - name: Build example - bio
         run: go run ./cmd/inkssg build ./examples/bio
 
+      - name: Build site
+        run: go run ./cmd/inkssg build site
+
       - name: Build example - library
         working-directory: examples/library
         run: |
