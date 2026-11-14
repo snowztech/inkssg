@@ -12,14 +12,15 @@
     <meta property="og:description" content="{{if .Page.Description}}{{.Page.Description}}{{else}}{{.Site.Meta.Description}}{{end}}">
     <meta name="twitter:card" content="summary">
     <meta name="theme-color" content="#0c0e13">
-    <!-- Fonts are served from this site and preloaded, so they are ready before the first paint. -->
-    <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Geist and Geist Mono ship with @snowztech/ui-css; Fraunces is inkssg's own. All preloaded so they are ready at first paint. -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@snowztech/ui-css@0.9.1/dist/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@snowztech/ui-css@0.9.1/dist/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@snowztech/ui-css@0.8.1/dist/snowztech-ui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@snowztech/ui-css@0.9.1/dist/fonts.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@snowztech/ui-css@0.9.1/dist/snowztech-ui.min.css">
     <link rel="stylesheet" href="themes/inkssg/styles.css">
     <script>try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@snowztech/ui-js@0.8.1/dist/snowztech-ui.esm.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@snowztech/ui-js@0.9.1/dist/snowztech-ui.esm.js"></script>
     <script src="themes/inkssg/script.js" defer></script>
   </head>
   <body class="page-{{.Page.Name}}">
