@@ -128,13 +128,21 @@ body { background: radial-gradient(900px 520px at 85% -10%, var(--glow), transpa
 
 /* Theme gallery: real builds, side by side. */
 .gallery { padding-block: var(--sn-s-10); border-top: 1px solid var(--sn-border-subtle); }
-.gallery__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--sn-s-4) var(--sn-s-8); margin-bottom: var(--sn-s-7); }
-.gallery__head h2 { margin: 0; font-size: 30px; line-height: 1.1; }
-.gallery__head .sn-lede { margin: 0; max-width: 52ch; font-size: var(--sn-text-md); }
+.gallery__head { margin-bottom: var(--sn-s-7); }
+.gallery__head h2 { margin: 0 0 var(--sn-s-3); font-size: 30px; line-height: 1.1; }
+.gallery__head .sn-lede { margin: 0; max-width: 60ch; font-size: var(--sn-text-md); }
 .themes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sn-s-5); }
 .themes figure { margin: 0; }
 .themes img { display: block; width: 100%; height: auto; border: 1px solid var(--sn-border); border-radius: var(--sn-radius-surface); box-shadow: var(--shadow); transition: transform var(--sn-base) var(--sn-ease); }
 .themes figure:hover img { transform: translateY(-2px); }
+/* Show each theme in the same light or dark as the page around it. */
+.shot-light { display: none !important; }
+[data-theme="light"] .shot-dark { display: none !important; }
+[data-theme="light"] .shot-light { display: block !important; }
+@media (prefers-color-scheme: light) {
+  [data-theme="system"] .shot-dark { display: none !important; }
+  [data-theme="system"] .shot-light { display: block !important; }
+}
 .themes figcaption { margin-top: var(--sn-s-3); color: var(--sn-fg-muted); font-size: var(--sn-text-sm); }
 .themes figcaption code { margin-right: var(--sn-s-2); color: var(--sn-fg); }
 
