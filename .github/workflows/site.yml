@@ -1,7 +1,7 @@
 name: Site
 
 # Builds site/ with inkssg from this repo and publishes it to GitHub Pages,
-# served at snowztech.github.io/inkssg.
+# served at inkssg.snowztech.com.
 on:
   push:
     branches: [main]

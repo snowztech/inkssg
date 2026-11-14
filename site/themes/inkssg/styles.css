@@ -2,6 +2,15 @@
    components; inkssg brings the colors of its logo, a serif for headings, and
    the octopus. */
 
+/* Self-hosted, Latin only, one variable file per family (SIL Open Font License).
+   Preloaded in layout.html, and font-display: optional, so text never swaps
+   fonts while you read: if a font isn't ready at first paint, that view keeps
+   the fallback and the next page uses the cached font. url() paths resolve
+   from this file, at themes/inkssg/. */
+@font-face { font-family: "Geist"; src: url("../../assets/fonts/geist.woff2") format("woff2"); font-weight: 400 600; font-display: optional; }
+@font-face { font-family: "Geist Mono"; src: url("../../assets/fonts/geist-mono.woff2") format("woff2"); font-weight: 400 500; font-display: optional; }
+@font-face { font-family: "Fraunces"; src: url("../../assets/fonts/fraunces.woff2") format("woff2"); font-weight: 500 600; font-display: optional; }
+
 /* Reading surfaces stay calm: near-neutral with a hint of the logo's cool
    blue. The navy lives in the logo tile; a periwinkle from the octopus (ink
    blue in light) is the accent. Pink stays on the octopus's cheeks only. */

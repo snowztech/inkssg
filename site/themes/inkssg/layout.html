@@ -12,9 +12,10 @@
     <meta property="og:description" content="{{if .Page.Description}}{{.Page.Description}}{{else}}{{.Site.Meta.Description}}{{end}}">
     <meta name="twitter:card" content="summary">
     <meta name="theme-color" content="#0c0e13">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+    <!-- Fonts are served from this site and preloaded, so they are ready before the first paint. -->
+    <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@snowztech/ui-css@0.8.1/dist/snowztech-ui.min.css">
     <link rel="stylesheet" href="themes/inkssg/styles.css">
     <script>try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
