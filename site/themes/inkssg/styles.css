@@ -1,14 +1,12 @@
-/* inkssg on top of @snowztech/ui-css. The library sets the structure and the
-   components; inkssg brings the colors of its logo, a serif for headings, and
-   the octopus. */
+/* inkssg on top of @snowztech/ui-css. The library sets the structure, the
+   components and the reading type (powder: Geist, Geist Mono, from the lib);
+   inkssg brings the colors of its logo, a serif for its big moments, and the
+   octopus. */
 
-/* Self-hosted, Latin only, one variable file per family (SIL Open Font License).
-   Preloaded in layout.html, and font-display: optional, so text never swaps
-   fonts while you read: if a font isn't ready at first paint, that view keeps
-   the fallback and the next page uses the cached font. url() paths resolve
-   from this file, at themes/inkssg/. */
-@font-face { font-family: "Geist"; src: url("../../assets/fonts/geist.woff2") format("woff2"); font-weight: 400 600; font-display: optional; }
-@font-face { font-family: "Geist Mono"; src: url("../../assets/fonts/geist-mono.woff2") format("woff2"); font-weight: 400 500; font-display: optional; }
+/* Fraunces is inkssg's own, so it lives here (Latin, variable, SIL Open Font
+   License). Geist and Geist Mono come from the lib's fonts.css. All preloaded
+   in layout.html with font-display: optional, so text never swaps mid-read.
+   url() resolves from this file, at themes/inkssg/. */
 @font-face { font-family: "Fraunces"; src: url("../../assets/fonts/fraunces.woff2") format("woff2"); font-weight: 500 600; font-display: optional; }
 
 /* Reading surfaces stay calm: near-neutral with a hint of the logo's cool
@@ -61,16 +59,18 @@
   }
 }
 
-/* Headings in the serif. Everything else follows powder: Geist, Geist Mono for code. */
-:root { --sn-font-display: "Fraunces", Georgia, serif; --sn-display-weight: 600; --sn-display-tracking: -0.02em; }
-h1, h2, h3 { font-family: var(--sn-font-display); font-optical-sizing: auto; }
+/* Reading type is powder, like onecorp: Geist for text and headings, Geist Mono
+   for code. Fraunces only where it carries the identity: the hero headline, the
+   wordmark, and the sample page inside the demo. */
+:root { --serif: "Fraunces", Georgia, serif; }
+.hero h1, .brand, .demo__page h2 { font-family: var(--serif); font-optical-sizing: auto; letter-spacing: -0.02em; }
 h3 { font-weight: 600; letter-spacing: -0.01em; }
 
 /* One soft glow at the top of the page, not a tile repeated down it. */
 body { background: radial-gradient(900px 520px at 85% -10%, var(--glow), transparent 70%) no-repeat, var(--sn-bg); }
 
 .site-header { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--sn-border-subtle); background: color-mix(in srgb, var(--sn-bg) 86%, transparent); backdrop-filter: blur(10px); }
-.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--sn-fg); font-family: var(--sn-font-display); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--sn-fg); font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
 .brand:hover { color: var(--sn-fg); }
 .brand-mark { width: 34px; height: 34px; margin: -3px; }
 .sn-nav .sn-theme-toggle { margin-left: calc(-1 * var(--sn-s-2)); }
@@ -141,7 +141,7 @@ body { background: radial-gradient(900px 520px at 85% -10%, var(--glow), transpa
 /* Docs */
 .docs { padding-block: var(--sn-s-10); }
 .docs .sn-prose { max-width: 720px; }
-.docs .sn-prose p, .docs .sn-prose li { line-height: 1.75; }
+.docs .sn-prose p, .docs .sn-prose li { line-height: 1.6; }
 .docs .sn-prose pre { position: relative; font-size: var(--sn-text-sm); }
 .docs .sn-prose pre .sn-copy-btn { position: absolute; top: var(--sn-s-2); right: var(--sn-s-2); opacity: 0; transition: opacity var(--sn-transition); }
 .docs .sn-prose pre:hover .sn-copy-btn, .docs .sn-prose pre .sn-copy-btn:focus-visible { opacity: 1; }
