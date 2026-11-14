@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="{{.Site.Meta.Lang}}" data-theme="system" data-sn-mode="powder">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{if eq .Page.Name "index"}}{{.Site.Meta.Title}}{{else}}{{.Page.Title}} · inkssg{{end}}</title>
+    <meta name="description" content="{{if .Page.Description}}{{.Page.Description}}{{else}}{{.Site.Meta.Description}}{{end}}">
+    <link rel="icon" type="image/svg+xml" href="assets/ink.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="inkssg">
+    <meta property="og:title" content="{{if eq .Page.Name "index"}}{{.Site.Meta.Title}}{{else}}{{.Page.Title}} · inkssg{{end}}">
+    <meta property="og:description" content="{{if .Page.Description}}{{.Page.Description}}{{else}}{{.Site.Meta.Description}}{{end}}">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#0c0e13">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@snowztech/ui-css@0.8.1/dist/snowztech-ui.min.css">
+    <link rel="stylesheet" href="themes/inkssg/styles.css">
+    <script>try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@snowztech/ui-js@0.8.1/dist/snowztech-ui.esm.js"></script>
+    <script src="themes/inkssg/script.js" defer></script>
+  </head>
+  <body class="page-{{.Page.Name}}">
+
+    <header class="site-header">
+      <div class="sn-container sn-header">
+        <div class="brand-row">
+          <a class="brand" href="./"><img class="brand-mark" src="assets/ink.svg" alt=""><span>inkssg</span></a>
+          <a class="version" href="https://github.com/snowztech/inkssg/releases" data-version hidden></a>
+        </div>
+        <nav class="sn-nav" aria-label="Main">
+          <a href="docs.html"{{if eq .Page.Name "docs"}} aria-current="page"{{end}}>Docs</a>
+          <a href="https://github.com/snowztech/inkssg/tree/main/examples">Examples</a>
+          {{range .Site.Links}}<a href="{{.URL}}">{{.Name}}</a>{{end}}
+          <button class="sn-theme-toggle sn-theme-toggle--sm" data-sn-theme-toggle aria-label="toggle theme"><span class="sn-theme-toggle__indicator"></span></button>
+        </nav>
+      </div>
+    </header>
+
+    <main>{{.Content}}</main>
+
+    <footer class="sn-container sn-footer">
+      <div class="sn-footer__top">
+        <div>
+          <a class="brand" href="./"><img class="brand-mark" src="assets/ink.svg" alt=""><span>inkssg</span></a>
+          <p>Markdown in, static site out. This site is built with it.</p>
+        </div>
+        <nav class="sn-footer__cols" aria-label="Footer">
+          <div><h2>Use it</h2><ul><li><a href="docs.html">Docs</a></li><li><a href="https://github.com/snowztech/inkssg/tree/main/examples">Examples</a></li><li><a href="https://github.com/snowztech/inkssg/releases">Releases</a></li></ul></div>
+          <div><h2>Project</h2><ul><li><a href="https://github.com/snowztech/inkssg">GitHub</a></li><li><a href="https://github.com/snowztech/inkssg/blob/main/ROADMAP.md">Roadmap</a></li><li><a href="https://github.com/snowztech/inkssg/issues">Issues</a></li></ul></div>
+        </nav>
+      </div>
+      <div class="sn-footer__legal">
+        <span>MIT licensed</span>
+        <span>made by <a href="https://snowztech.com">snowztech</a></span>
+      </div>
+    </footer>
+  </body>
+</html>

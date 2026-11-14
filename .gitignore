@@ -14,3 +14,6 @@ ignored/
 
 # example build output
 examples/*/public/
+
+# website build output
+site/public/

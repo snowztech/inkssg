@@ -1,0 +1,183 @@
+/* inkssg on top of @snowztech/ui-css. The library sets the structure and the
+   components; inkssg brings the colors of its logo, a serif for headings, and
+   the octopus. */
+
+/* Reading surfaces stay calm: near-neutral with a hint of the logo's cool
+   blue. The navy lives in the logo tile; a periwinkle from the octopus (ink
+   blue in light) is the accent. Pink stays on the octopus's cheeks only. */
+:root, [data-theme="dark"] {
+  --sn-bg: #0c0e13;
+  --sn-bg-elev-1: #12151c;
+  --sn-bg-elev-2: #181c25;
+  --sn-bg-inset: #090b0f;
+  --sn-border: #1f2430;
+  --sn-border-strong: #2c3240;
+  --sn-border-subtle: #171b23;
+  --sn-fg: #eef0f5;
+  --sn-fg-muted: #b0b6c3;
+  --sn-fg-subtle: #8a91a1;
+  --sn-fg-faint: #5d6474;
+  --sn-fg-inverse: #0c0e13;
+  --sn-accent-on-dark: #a8b9f0;
+  --sn-accent-on-light: #2d3f86;
+
+  --glow: rgba(168, 185, 240, 0.05);
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(244, 247, 253, 0.05);
+}
+
+[data-theme="light"] {
+  --sn-bg: #fafbfc;
+  --sn-bg-elev-1: #ffffff;
+  --sn-bg-elev-2: #ffffff;
+  --sn-bg-inset: #f0f2f6;
+  --sn-border: #e1e4ea;
+  --sn-border-strong: #c9ced8;
+  --sn-border-subtle: #eceef2;
+  --sn-fg: #0f1320;
+  --sn-fg-muted: #434a5a;
+  --sn-fg-subtle: #5c6373;
+  --sn-fg-faint: #9097a6;
+  --sn-fg-inverse: #ffffff;
+
+  --glow: rgba(45, 63, 134, 0.04);
+  --shadow: 0 24px 60px rgba(11, 16, 32, 0.12), 0 0 0 1px rgba(11, 16, 32, 0.06);
+}
+@media (prefers-color-scheme: light) {
+  [data-theme="system"] {
+    --sn-bg: #fafbfc; --sn-bg-elev-1: #ffffff; --sn-bg-elev-2: #ffffff; --sn-bg-inset: #f0f2f6;
+    --sn-border: #e1e4ea; --sn-border-strong: #c9ced8; --sn-border-subtle: #eceef2;
+    --sn-fg: #0f1320; --sn-fg-muted: #434a5a; --sn-fg-subtle: #5c6373; --sn-fg-faint: #9097a6; --sn-fg-inverse: #ffffff;
+    --glow: rgba(45, 63, 134, 0.04);
+    --shadow: 0 24px 60px rgba(11, 16, 32, 0.12), 0 0 0 1px rgba(11, 16, 32, 0.06);
+  }
+}
+
+/* Headings in the serif. Everything else follows powder: Geist, Geist Mono for code. */
+:root { --sn-font-display: "Fraunces", Georgia, serif; --sn-display-weight: 600; --sn-display-tracking: -0.02em; }
+h1, h2, h3 { font-family: var(--sn-font-display); font-optical-sizing: auto; }
+h3 { font-weight: 600; letter-spacing: -0.01em; }
+
+/* One soft glow at the top of the page, not a tile repeated down it. */
+body { background: radial-gradient(900px 520px at 85% -10%, var(--glow), transparent 70%) no-repeat, var(--sn-bg); }
+
+.site-header { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--sn-border-subtle); background: color-mix(in srgb, var(--sn-bg) 86%, transparent); backdrop-filter: blur(10px); }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--sn-fg); font-family: var(--sn-font-display); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
+.brand:hover { color: var(--sn-fg); }
+.brand-mark { width: 34px; height: 34px; margin: -3px; }
+.sn-nav .sn-theme-toggle { margin-left: calc(-1 * var(--sn-s-2)); }
+
+.brand-row { display: inline-flex; align-items: center; gap: var(--sn-s-3); }
+.version { padding: 2px 7px; border: 1px solid var(--sn-border); border-radius: var(--sn-radius-chip); color: var(--sn-fg-subtle); font-family: var(--sn-font-mono); font-size: var(--sn-text-2xs); text-decoration: none; transition: color var(--sn-transition), border-color var(--sn-transition); }
+.version:hover { color: var(--sn-fg); border-color: var(--sn-border-strong); }
+
+/* Hero: what it is on the left, inkssg serve doing its job on the right. */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sn-s-10); align-items: center; padding-block: var(--sn-s-11); }
+.hero h1 { margin: 0 0 var(--sn-s-5); font-size: clamp(38px, 4.6vw, 54px); line-height: 1.05; letter-spacing: -0.03em; }
+.hero .sn-lede { margin: 0 0 var(--sn-s-7); max-width: 40ch; }
+.install { display: flex; align-items: center; gap: var(--sn-s-2); max-width: 100%; height: var(--sn-control-lg); padding: 0 var(--sn-s-1) 0 var(--sn-s-4); border: 1px solid var(--sn-border); border-radius: var(--sn-radius-control); background: var(--sn-bg-inset); font-family: var(--sn-font-mono); font-size: var(--sn-text-xs); }
+.install code { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.install code::before { content: "$ "; color: var(--sn-fg-subtle); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--sn-s-2); margin-top: var(--sn-s-3); }
+
+.demo { margin: 0; overflow: hidden; border: 1px solid var(--sn-border); border-radius: var(--sn-radius-surface); background: var(--sn-bg-elev-1); box-shadow: var(--shadow); }
+.demo__bar { display: flex; justify-content: space-between; align-items: center; height: var(--sn-control-md); padding: 0 var(--sn-s-4); border-bottom: 1px solid var(--sn-border); color: var(--sn-fg-subtle); font-family: var(--sn-font-mono); font-size: var(--sn-text-xs); }
+.demo__status { display: inline-flex; align-items: center; gap: 6px; }
+.demo__status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--sn-success); }
+.demo__panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.demo__pane { min-width: 0; }
+.demo__pane--out { border-left: 1px solid var(--sn-border); background: var(--sn-bg); }
+.demo__tab { display: flex; justify-content: space-between; align-items: center; padding: var(--sn-s-2) var(--sn-s-4); border-bottom: 1px solid var(--sn-border-subtle); color: var(--sn-fg-subtle); font-family: var(--sn-font-mono); font-size: var(--sn-text-2xs); }
+.demo__src { margin: 0; padding: var(--sn-s-4); min-height: 236px; color: var(--sn-fg-muted); font-family: var(--sn-font-mono); font-size: var(--sn-text-xs); line-height: 1.75; white-space: pre-wrap; }
+.demo__src .fm { color: var(--sn-fg-subtle); }
+.demo__src .h { color: var(--sn-fg); }
+.demo__src .ln { color: var(--sn-accent); }
+.demo__page { padding: var(--sn-s-5); }
+.demo__page h2 { margin: 0 0 var(--sn-s-2); font-size: 24px; line-height: 1.15; }
+.demo__page p { margin: 0 0 var(--sn-s-3); color: var(--sn-fg-muted); font-size: var(--sn-text-sm); }
+.demo__page a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* The only motion on the page: a caret while typing, and a "reloaded" mark when the page follows. */
+.caret { display: none; width: 7px; height: 1.1em; margin-left: 1px; vertical-align: text-bottom; background: var(--sn-accent); }
+.is-live .caret { display: inline-block; animation: sn-blink 1s steps(1) infinite; }
+.demo__reload { opacity: 0; color: var(--sn-success); }
+.demo__reload.on { animation: reload 1.6s var(--sn-ease); }
+@keyframes reload { 0%, 70% { opacity: 1; } 100% { opacity: 0; } }
+
+/* Sections: a heading on the left, the thing itself on the right. */
+.band { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--sn-s-10); align-items: start; padding-block: var(--sn-s-10); border-top: 1px solid var(--sn-border-subtle); }
+.band h2 { margin: 0 0 var(--sn-s-3); font-size: 30px; line-height: 1.1; }
+.band .sn-lede { margin: 0; max-width: 36ch; font-size: var(--sn-text-md); }
+.band pre.sn-code { margin: 0; font-size: var(--sn-text-xs); }
+.commands .c { color: var(--sn-fg-subtle); }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sn-s-6) var(--sn-s-7); margin: 0; }
+.facts dt { margin-bottom: var(--sn-s-1); color: var(--sn-fg); font-weight: 500; }
+.facts dd { margin: 0; color: var(--sn-fg-muted); font-size: var(--sn-text-sm); }
+.tree { margin: 0; }
+.nope { display: grid; gap: var(--sn-s-2); margin: 0; padding: 0; list-style: none; color: var(--sn-fg-muted); }
+.nope li { display: flex; gap: var(--sn-s-3); align-items: baseline; padding-bottom: var(--sn-s-2); border-bottom: 1px solid var(--sn-border-subtle); }
+.nope li::before { content: "no"; flex: 0 0 auto; color: var(--sn-fg-subtle); font-family: var(--sn-font-mono); font-size: var(--sn-text-2xs); text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* Theme gallery: real builds, side by side. */
+.gallery { padding-block: var(--sn-s-10); border-top: 1px solid var(--sn-border-subtle); }
+.gallery__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--sn-s-4) var(--sn-s-8); margin-bottom: var(--sn-s-7); }
+.gallery__head h2 { margin: 0; font-size: 30px; line-height: 1.1; }
+.gallery__head .sn-lede { margin: 0; max-width: 52ch; font-size: var(--sn-text-md); }
+.themes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sn-s-5); }
+.themes figure { margin: 0; }
+.themes img { display: block; width: 100%; height: auto; border: 1px solid var(--sn-border); border-radius: var(--sn-radius-surface); box-shadow: var(--shadow); transition: transform var(--sn-base) var(--sn-ease); }
+.themes figure:hover img { transform: translateY(-2px); }
+.themes figcaption { margin-top: var(--sn-s-3); color: var(--sn-fg-muted); font-size: var(--sn-text-sm); }
+.themes figcaption code { margin-right: var(--sn-s-2); color: var(--sn-fg); }
+
+/* Docs */
+.docs { padding-block: var(--sn-s-10); }
+.docs .sn-prose { max-width: 720px; }
+.docs .sn-prose p, .docs .sn-prose li { line-height: 1.75; }
+.docs .sn-prose pre { position: relative; font-size: var(--sn-text-sm); }
+.docs .sn-prose pre .sn-copy-btn { position: absolute; top: var(--sn-s-2); right: var(--sn-s-2); opacity: 0; transition: opacity var(--sn-transition); }
+.docs .sn-prose pre:hover .sn-copy-btn, .docs .sn-prose pre .sn-copy-btn:focus-visible { opacity: 1; }
+.docs .sn-prose h2 { position: relative; }
+/* Land below the sticky header when jumping to a section. */
+.docs .sn-prose :is(h2, h3)[id] { scroll-margin-top: 88px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* What each code block is, before you read it. */
+.docs .sn-prose pre[data-label] { padding-top: calc(var(--sn-s-4) + 18px); }
+.docs .sn-prose pre[data-label]::before { content: attr(data-label); position: absolute; top: var(--sn-s-2); left: var(--sn-s-4); color: var(--sn-fg-subtle); font-family: var(--sn-font-mono); font-size: var(--sn-text-2xs); letter-spacing: 0.04em; }
+/* No hover on touch screens: keep copy buttons visible there. */
+@media (hover: none) { .docs .sn-prose pre .sn-copy-btn, .docs .sn-prose h2 .anchor { opacity: 1; } }
+.docs .edit { margin-top: var(--sn-s-8); padding-top: var(--sn-s-5); border-top: 1px solid var(--sn-border-subtle); font-size: var(--sn-text-sm); }
+.anchor { position: absolute; left: -1.1em; padding-right: 0.3em; color: var(--sn-fg-faint); font-weight: 400; text-decoration: none !important; opacity: 0; transition: opacity var(--sn-transition); }
+.docs .sn-prose h2:hover .anchor, .anchor:focus-visible { opacity: 1; }
+.anchor:hover { color: var(--sn-accent); }
+.docs .sn-prose h1 { margin-bottom: var(--sn-s-3); font-size: 46px; letter-spacing: -0.03em; }
+.docs .sn-prose h2 { font-size: 28px; }
+.docs .sn-prose a { text-decoration-color: color-mix(in srgb, var(--sn-accent) 60%, transparent); }
+.docs .scroll { overflow-x: auto; margin: 0 0 var(--sn-s-4); }
+.docs .scroll table { margin: 0; }
+.docs .sn-prose table code { white-space: nowrap; }
+
+.sn-footer .brand { font-size: 18px; }
+.sn-footer .brand-mark { width: 28px; height: 28px; }
+
+@media (max-width: 960px) {
+  .themes { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
+  .hero, .band { grid-template-columns: minmax(0, 1fr); gap: var(--sn-s-7); }
+  .hero { padding-block: var(--sn-s-9); }
+  .band { padding-block: var(--sn-s-8); }
+}
+@media (max-width: 560px) {
+  .sn-nav a[href*="examples"] { display: none; }
+  .demo__panes { grid-template-columns: minmax(0, 1fr); }
+  .demo__pane--out { border-left: 0; border-top: 1px solid var(--sn-border); }
+  .demo__src { min-height: 0; }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The install command needs the full width before the hero gets tight. */
+@media (max-width: 1120px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: var(--sn-s-8); }
+  .hero .sn-lede { max-width: 56ch; }
+  .install { max-width: 560px; }
+}
+
